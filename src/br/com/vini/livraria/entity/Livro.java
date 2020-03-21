@@ -1,13 +1,45 @@
 package br.com.vini.livraria.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+@Entity
 public class Livro {
-	
-	public String titulo;
-	public String isbn;
-	public double preco;
-	public String dataLancamento;
+
+	@Id
+	@GeneratedValue
+	private Integer id;
+
+	private String titulo;
+	private String isbn;
+	private double preco;
+	private String dataLancamento;
+
+	@ManyToMany
+	private List<Autor> autores = new ArrayList<Autor>();
+
+	public List<Autor> getAutores() {
+		return autores;
+	}
+
+	public void adicionaAutor(Autor autor) {
+		this.autores.add(autor);
+	}
 
 	public Livro() {
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getTitulo() {
@@ -41,6 +73,5 @@ public class Livro {
 	public void setDataLancamento(String dataLancamento) {
 		this.dataLancamento = dataLancamento;
 	}
-	
-	
+
 }
