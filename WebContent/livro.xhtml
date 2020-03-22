@@ -19,10 +19,13 @@
 		<h:outputLabel value="ISBN" for="isbn" />
 		<h:inputText id="isbn" value="#{livroBean.livro.isbn}" validator="#{livroBean.comecaoComDigitoUm}"/>
 		<h:outputLabel value="Preço:" for="preco" />
-		<h:inputText id="preco" value="#{livroBean.livro.preco}"/>
+		<h:inputText id="preco" value="#{livroBean.livro.preco}"
+			validatorMessage="O valor do livro deve estar entre 1 e 1000">
+			<f:validateDoubleRange minimum="1" maximum="1000"/>
+		</h:inputText>
 		<h:outputLabel value="Data de Lançamento" for="dataLancamento" />
 		<h:inputText id="dataLancamento" value="#{livroBean.livro.dataLancamento.time}">
-			<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+			<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo"/>
 		</h:inputText>
 		</h:panelGrid>
 	</fieldset>
@@ -43,8 +46,33 @@
 	</fieldset>
 		
 	<h:commandButton value="Gravar" action="#{livroBean.gravar()}"/>
-		
-		
+
+
+		<h:dataTable id="tabelaLivros" value="#{livroBean.livros}" var="livro">
+			<h:column>
+				<f:facet name="header">Título</f:facet>
+				<h:outputText value="#{livro.titulo}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">ISBN</f:facet>
+				<h:outputText value="#{livro.isbn}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Preço</f:facet>
+				<h:outputText value="#{livro.preco}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">Data</f:facet>
+				<h:outputText value="#{livro.dataLancamento.time}">
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+						timeZone="America/Sao_Paulo" />
+				</h:outputText>
+			</h:column>
+		</h:dataTable>
+
 	</h:form>
 </h:body>
 
