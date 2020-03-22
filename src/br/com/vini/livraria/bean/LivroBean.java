@@ -46,6 +46,11 @@ public class LivroBean {
 		}
 	}
 	
+	public String formAutor() {
+		System.out.println("Chamando o Formulario Autor");
+		return "autor?faces-redirect=true";
+	}
+	
 	public List<Livro> getLivros() {
 		  return new DAO<Livro>(Livro.class).listaTodos();
 	}

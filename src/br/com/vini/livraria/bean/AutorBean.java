@@ -4,6 +4,7 @@ import javax.faces.bean.ManagedBean;
 
 import br.com.vini.livraria.dao.DAO;
 import br.com.vini.livraria.entity.Autor;
+import br.com.vini.livraria.util.RedirectView;
 
 @ManagedBean
 public class AutorBean {
@@ -14,11 +15,13 @@ public class AutorBean {
 		return autor;
 	}
 
-	public void gravar() {
+	public RedirectView gravar() {
 		System.out.println("Gravando autor " + this.autor.getNome());
 
 		new DAO<Autor>(Autor.class).adiciona(this.autor);
 		
 		this.autor = new Autor();
+		
+		return new RedirectView("livro");
 	}
 }
