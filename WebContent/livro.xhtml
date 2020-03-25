@@ -100,6 +100,12 @@
 					<f:ajax execute="@this" render="@form"></f:ajax>
 				</h:commandLink>
 			</h:column>
+			<h:column>
+				<f:facet name="header">Alterar</f:facet>
+				<h:commandLink id="cmlAlterarLivro"  action="#{livroBean.carregar(livro)}" value="Alterar">
+					<f:ajax execute="@this" render="@form"></f:ajax>
+				</h:commandLink>
+			</h:column>
 		</h:dataTable>
 		
 	</h:form>

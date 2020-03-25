@@ -28,14 +28,23 @@ public class LivroBean {
 			FacesContext.getCurrentInstance().addMessage("autor", new FacesMessage("Livro deve ter um autor"));
 			return;
 		}
-
-		new DAO<Livro>(Livro.class).adiciona(this.livro);
+		
+		if(this.livro.getId() == null) {
+			new DAO<Livro>(Livro.class).adiciona(this.livro);
+		}else {
+			new DAO<Livro>(Livro.class).atualiza(this.livro);
+		}
+		
 		
 		this.livro = new Livro();
 	}
 	
 	public void remover(Livro livro) {
 		new DAO<Livro>(Livro.class).remove(livro);
+	}
+	
+	public void carregar(Livro livro) {
+		this.livro = livro;
 	}
 	
 	public void gravarAutor() {
