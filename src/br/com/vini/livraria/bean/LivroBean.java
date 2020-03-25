@@ -34,6 +34,10 @@ public class LivroBean {
 		this.livro = new Livro();
 	}
 	
+	public void remover(Livro livro) {
+		new DAO<Livro>(Livro.class).remove(livro);
+	}
+	
 	public void gravarAutor() {
 		Autor autor = new DAO<Autor>(Autor.class).buscaPorId(this.autorId);
 		this.livro.adicionaAutor(autor);

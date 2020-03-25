@@ -93,8 +93,15 @@
 						timeZone="America/Sao_Paulo" />
 				</h:outputText>
 			</h:column>
-		</h:dataTable>
 
+			<h:column>
+				<f:facet name="header">Remover</f:facet>
+				<h:commandLink id="cmlRemoverLivro" action="#{livroBean.remover(livro)}" value="Remover">
+					<f:ajax execute="@this" render="@form"></f:ajax>
+				</h:commandLink>
+			</h:column>
+		</h:dataTable>
+		
 	</h:form>
 	</ui:define>
 </ui:composition>
