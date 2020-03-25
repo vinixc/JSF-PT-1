@@ -17,6 +17,8 @@ import br.com.vini.livraria.util.RedirectView;
 public class AutorBean {
 
 	private Autor autor = new Autor();
+	
+	private Integer autorId;
 
 	public Autor getAutor() {
 		return autor;
@@ -51,7 +53,19 @@ public class AutorBean {
 		}
 	}
 	
+	public void carregaPeloId() {
+		this.autor = new DAO<Autor>(Autor.class).buscaPorId(autorId);
+	}
+	
 	public void carregaAutor(Autor autor) {
 		this.autor = autor;
+	}
+
+	public Integer getAutorId() {
+		return autorId;
+	}
+
+	public void setAutorId(Integer autorId) {
+		this.autorId = autorId;
 	}
 }
