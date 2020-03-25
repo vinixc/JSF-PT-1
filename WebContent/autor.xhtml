@@ -28,7 +28,16 @@
 				<legend>Dados do Autor</legend>
 				<h:panelGrid columns="2">
 					<h:outputLabel value="Nome:" for="nome" />
-					<h:inputText id="nome" value="#{autorBean.autor.nome}" />
+					<h:inputText id="nome" value="#{autorBean.autor.nome}">
+						<f:ajax event="blur" execute="@this" render="@this"/>
+					</h:inputText>
+					
+					<h:outputLabel value="Email:" for="email" />
+					<h:inputText id="email" value="#{autorBean.autor.email}" >
+						<f:passThroughAttribute name="type" value="email"/>
+						<f:ajax event="blur" execute="@this" render="@this"/>
+					</h:inputText>
+					
 					<h:commandButton value="Gravar" action="#{autorBean.gravar}" />
 				</h:panelGrid>
 			</fieldset>
