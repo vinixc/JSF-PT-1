@@ -62,6 +62,11 @@
 			<h:column>
 				<h:outputText value="#{autor.nome}" />
 			</h:column>
+			<h:column>
+				<h:commandLink id="cmlRemoverAutor"  action="#{livroBean.removerAutor(autor)}" value="X">
+					<f:ajax execute="@this" render="@form"></f:ajax>
+				</h:commandLink>
+			</h:column>
 	</h:dataTable>
 	</fieldset>
 		
@@ -102,7 +107,8 @@
 			</h:column>
 			<h:column>
 				<f:facet name="header">Alterar</f:facet>
-				<h:commandLink id="cmlAlterarLivro"  action="#{livroBean.carregar(livro)}" value="Alterar">
+				<h:commandLink id="cmlAlterarLivro" value="Alterar">
+					<f:setPropertyActionListener value="#{livro}" target="#{livroBean.livro}" />
 					<f:ajax execute="@this" render="@form"></f:ajax>
 				</h:commandLink>
 			</h:column>

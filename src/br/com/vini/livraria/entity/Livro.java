@@ -83,5 +83,10 @@ public class Livro {
 	public void setAutores(List<Autor> autores) {
 		this.autores = autores;
 	}
+
+	public void removeAutor(Autor autor) {
+		this.autores.remove(autor);
+		
+	}
 	
 }

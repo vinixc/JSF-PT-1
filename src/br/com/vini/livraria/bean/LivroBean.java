@@ -39,12 +39,12 @@ public class LivroBean {
 		this.livro = new Livro();
 	}
 	
-	public void remover(Livro livro) {
-		new DAO<Livro>(Livro.class).remove(livro);
+	public void removerAutor(Autor autor) {
+		this.livro.removeAutor(autor);
 	}
 	
-	public void carregar(Livro livro) {
-		this.livro = livro;
+	public void remover(Livro livro) {
+		new DAO<Livro>(Livro.class).remove(livro);
 	}
 	
 	public void gravarAutor() {
