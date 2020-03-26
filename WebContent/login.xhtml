@@ -17,7 +17,7 @@
 	
 	<ui:define name="conteudo">
 		<h:form id="login">
-		<h:messages id="messages"/>
+		<h:messages id="messages" globalOnly="true"/>
 			<fieldset>
 				<legend>Login</legend>
 				<h:panelGrid columns="2">
@@ -26,11 +26,11 @@
 						<f:passThroughAttribute name="type" value="email"/>
 						<f:ajax event="blur" execute="@this" render="@this"/>
 					</h:inputText>
-					
+										
 					<h:outputLabel value="Senha:" for="senha" />
 					<h:inputSecret id="senha" value="#{loginBean.usuario.senha}" required="true" />
 					
-					<h:commandButton value="Login" action="#{loginBean.efetuaLogin}" />
+					<h:commandButton value="Login" action="#{loginBean.efetuaLogin}"/>
 				</h:panelGrid>
 			</fieldset>
 			
