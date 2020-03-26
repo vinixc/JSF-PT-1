@@ -23,8 +23,13 @@
 			<h:outputLabel value="Pagina: " />
 				<ui:insert name="paginaName"></ui:insert>
 				<br/>
-			<h:outputLabel value="copyright 2020" />
+			<h:outputLabel value="copyright 2020" /><br/>
+			<h:outputLabel value="Usuario:  #{sessionScope['usuario'].email}" />
 		</div>
+		
+		<h:form rendered="#{usuario != null}">
+			<h:commandLink action="#{loginBean.deslogar}" value="Logout" />
+		</h:form>
 		
 		</h:body>
 	</h:head>

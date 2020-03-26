@@ -29,6 +29,12 @@ public class LoginBean {
 		}
 		
 	}
+	
+	public RedirectView deslogar() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().remove("usuario");
+		return new RedirectView("login");
+	}
 
 	public Usuario getUsuario() {
 		return usuario;
