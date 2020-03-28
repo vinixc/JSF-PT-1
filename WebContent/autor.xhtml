@@ -45,25 +45,17 @@
 			
 			<br/>
 			
-			<h:dataTable value="#{autorBean.listaAutores()}" var="autor" id="dtAutores">
-				<h:column>
-					<f:facet name="header">Autor</f:facet>
-					<p:outputLabel value="#{autor.nome}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">Remover</f:facet>
-					<h:commandLink action="#{autorBean.removerAutor(autor)}" value="Remover">
-						<f:ajax execute="@this" render="@form"/>
-					</h:commandLink>
-				</h:column>
-				<h:column>
-					<f:facet name="header">Atualizar</f:facet>
-					<h:commandLink action="#{autorBean.carregaAutor(autor)}" value="Atualizar">
-						<f:ajax execute="@this" render="@form"/>
-					</h:commandLink>
-				</h:column>
-			
-			</h:dataTable>
+			<p:dataList value="#{autorBean.listaAutores()}" var="autor" type="definition">
+				<f:facet name="header">Autores</f:facet>
+				
+				<p:commandLink action="#{autorBean.carregaAutor(autor)}" process="@this" update="@form"
+				styleClass="ui-icon ui-icon-pencil" style="float:left;margin-right:10px"/>
+				
+				<p:commandLink action="#{autorBean.removerAutor(autor)}" process="@this" update="@form"
+				styleClass="ui-icon ui-icon-trash" style="float:left;margin-right:10px"/>
+				
+				#{autor.nome} - #{autor.email}
+			</p:dataList>
 		</h:form>
 	</ui:define>
 	</ui:composition>

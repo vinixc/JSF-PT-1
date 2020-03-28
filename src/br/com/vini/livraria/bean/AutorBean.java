@@ -48,7 +48,11 @@ public class AutorBean {
 		}catch(PersistenceException e) {
 			e.printStackTrace();
 
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("O Autor não deve ter livros cadastrados para remoção."));;
+			FacesMessage message = new FacesMessage();
+			message.setSummary("O Autor não deve ter livros cadastrados para remoção.");
+			message.setSeverity(FacesMessage.SEVERITY_ERROR);
+			
+			FacesContext.getCurrentInstance().addMessage(null, message);
 			return;
 		}
 	}
