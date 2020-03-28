@@ -24,7 +24,7 @@
 		<p:panelGrid columns="2">
 		
 		<p:outputLabel value="Titulo" for="titulo" />
-		<p:inputText id="titulo" value="#{livroBean.livro.titulo}" required="true" requiredMessage="Titulo Obrigatorio"
+		<p:inputText id="titulo" value="#{livroBean.livro.titulo}" required="true" requiredMessage="Titulo Obrigatorio" 
 			validatorMessage="titulo não pode ser superior a 40">
 			<f:validateLength maximum="40"/>
 			<f:ajax event="blur" render="messages"/>
