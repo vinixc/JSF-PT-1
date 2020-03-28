@@ -42,7 +42,7 @@
 		
 		<p:outputLabel value="Data de Lançamento" for="dataLancamento" />
 		<p:calendar id="dataLancamento" value="#{livroBean.livro.dataLancamento.time}"
-		pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo" mask="true"/>
+		pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo" mask="true" />
 		
 		</p:panelGrid>
 	</p:fieldset>
@@ -63,51 +63,47 @@
 				<h:outputText value="#{autor.nome}" />
 			</p:column>
 			<p:column headerText="Ação">
-				<p:commandLink id="cmlRemoverAutor"  action="#{livroBean.removerAutor(autor)}" value="Remover" process="@this" update="@form"/>
+				<p:commandButton id="cmlRemoverAutor" action="#{livroBean.removerAutor(autor)}"
+				 icon="fa fa-fw fa-remove" value="Remover" process="@this" update="@form"/>
 			</p:column>
 	</p:dataTable>
 	</p:fieldset>
 		
 	<p:commandButton value="Gravar" action="#{livroBean.gravar()}" process="@form" update="@form"/>
 		
-		<h:dataTable id="tabelaLivros" value="#{livroBean.livros}" var="livro">
-			<h:column>
-				<f:facet name="header">Título</f:facet>
+		<p:dataTable id="tabelaLivros" value="#{livroBean.livros}" var="livro">
+			<f:facet name="header">Livros</f:facet>
+			<p:column headerText="Título" sortBy="#{livro.titulo}">
 				<h:outputText value="#{livro.titulo}" />
-			</h:column>
+			</p:column>
 
-			<h:column>
-				<f:facet name="header">ISBN</f:facet>
+			<p:column headerText="ISBN" sortBy="#{livro.isbn}">
 				<h:outputText value="#{livro.isbn}" />
-			</h:column>
+			</p:column>
 
-			<h:column>
-				<f:facet name="header">Preço</f:facet>
+			<p:column headerText="Preço">
 				<h:outputText value="#{livro.preco}" />
-			</h:column>
+			</p:column>
 
-			<h:column>
-				<f:facet name="header">Data</f:facet>
+			<p:column headerText="Data">
 				<h:outputText value="#{livro.dataLancamento.time}">
 					<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
 						timeZone="America/Sao_Paulo" />
 				</h:outputText>
-			</h:column>
+			</p:column>
 
-			<h:column>
-				<f:facet name="header">Remover</f:facet>
+			<p:column headerText="Remover">
 				<h:commandLink id="cmlRemoverLivro" action="#{livroBean.remover(livro)}" value="Remover">
 					<f:ajax execute="@this" render="@form"></f:ajax>
 				</h:commandLink>
-			</h:column>
-			<h:column>
-				<f:facet name="header">Alterar</f:facet>
+			</p:column>
+			<p:column headerText="Alterar">
 				<h:commandLink id="cmlAlterarLivro" value="Alterar">
 					<f:setPropertyActionListener value="#{livro}" target="#{livroBean.livro}" />
 					<f:ajax execute="@this" render="@form"></f:ajax>
 				</h:commandLink>
-			</h:column>
-		</h:dataTable>
+			</p:column>
+		</p:dataTable>
 		
 	</h:form>
 	</ui:define>
