@@ -8,8 +8,31 @@
 	
 	<h:head>
 		<h:body>
+		<p:growl id="messages" showDetail="true" autoUpdate="true"/>
+		
 		<div id="cabecalho">
 			<h:graphicImage library="img" name="logo-cav.png" />
+		
+			<h:form>
+				<p:menu toggleable="true" rendered="#{usuario != null}">
+   					 <p:submenu label="Cadastros">
+        				<p:menuitem value="Livros" action="livro?faces-redirect=true"  icon="fa fa-fw fa-edit" />
+        				<p:menuitem value="Autor" action="autor?faces-redirect=true"  icon="fa fa-fw fa-edit" />
+    				</p:submenu>
+    				<p:submenu label="Outros">
+        				<p:menuitem value="Logout" action="#{loginBean.deslogar}" icon="fa fa-fw fa-sign-out"/>
+    				</p:submenu>
+				</p:menu>
+				
+				<br/>
+				<p:menuButton value="Menu" rendered="#{usuario != null}">
+					<p:menuitem value="Livro" action="livro" icon="fa fa-fw fa-edit"/>
+					<p:menuitem value="Autor" action="autor" icon="fa fa-fw fa-edit"/>
+					<p:separator/>
+					<p:menuitem value="logout" action="#{loginBean.deslogar}" icon="fa fa-fw fa-sign-out"/>
+				</p:menuButton>
+			</h:form>
+			
 			<h1><ui:insert name="titulo"></ui:insert></h1>
 		</div>
 		
@@ -27,10 +50,6 @@
 			<h:outputLabel value="copyright 2020" /><br/>
 			<h:outputLabel value="Usuario:  #{sessionScope['usuario'].email}" />
 		</div>
-		
-		<h:form rendered="#{usuario != null}">
-			<h:commandLink action="#{loginBean.deslogar}" value="Logout" />
-		</h:form>
 		
 		</h:body>
 	</h:head>
