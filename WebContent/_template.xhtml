@@ -17,8 +17,7 @@
 			<h:form  rendered="#{usuario != null}" style="position:absolute; right:10px">
 				<p:outputLabel value="Thema: "/><br/>
 				 <p:themeSwitcher id="basic" style="width:165px" value="#{themaBean.tema}">
-            		<f:selectItem itemLabel="Aristo" itemValue="aristo" />
-            		<f:selectItem itemLabel="Vader" itemValue="vader" />
+            		<f:selectItems value="#{themaBean.temas}" var="thema" itemLabel="#{thema}" itemValue="#{thema}"/>
             		<f:ajax/>
         		</p:themeSwitcher>
         		
