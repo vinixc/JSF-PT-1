@@ -4,12 +4,13 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.PersistenceException;
 
-import br.com.vini.livraria.dao.DAO;
+import br.com.vini.livraria.dao.AutorDao;
 import br.com.vini.livraria.entity.Autor;
 import br.com.vini.livraria.util.RedirectView;
 
@@ -21,6 +22,9 @@ public class AutorBean implements Serializable{
 	private Autor autor = new Autor();
 	
 	private Integer autorId;
+	
+	@Inject
+	private AutorDao dao;
 
 	public Autor getAutor() {
 		return autor;
@@ -30,9 +34,9 @@ public class AutorBean implements Serializable{
 		System.out.println("Gravando autor " + this.autor.getNome());
 		
 		if(this.autor.getId() != null) {
-			new DAO<Autor>(Autor.class).atualiza(this.autor);
+			this.dao.atualiza(this.autor);
 		}else {
-			new DAO<Autor>(Autor.class).adiciona(this.autor);
+			this.dao.adiciona(this.autor);
 		}
 		
 		this.autor = new Autor();
@@ -41,12 +45,12 @@ public class AutorBean implements Serializable{
 	}
 	
 	public List<Autor> listaAutores() {
-		return new DAO<Autor>(Autor.class).listaTodos();
+		return this.dao.listaTodos();
 	}
 	
 	public void removerAutor(Autor autor) {
 		try {
-			new DAO<Autor>(Autor.class).remove(autor);
+			this.dao.remove(autor);
 		}catch(PersistenceException e) {
 			e.printStackTrace();
 
@@ -60,7 +64,7 @@ public class AutorBean implements Serializable{
 	}
 	
 	public void carregaPeloId() {
-		this.autor = new DAO<Autor>(Autor.class).buscaPorId(autorId);
+		this.autor = this.dao.buscaPorId(autorId);
 	}
 	
 	public void carregaAutor(Autor autor) {
