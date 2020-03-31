@@ -14,7 +14,7 @@ import br.com.vini.livraria.entity.Autor;
 import br.com.vini.livraria.util.RedirectView;
 
 @Named
-@ViewScoped
+@ViewScoped 
 public class AutorBean implements Serializable{
 	private static final long serialVersionUID = -1458672100805487164L;
 	
