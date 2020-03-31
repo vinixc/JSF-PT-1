@@ -40,7 +40,7 @@ public class VendasBean {
 		model.setLegendPosition("ne");
 		
 		Axis xAxis = model.getAxis(AxisType.X);
-	    xAxis.setLabel("Título");
+	    xAxis.setLabel("Titulo");
 	    
 	    Axis yAxis = model.getAxis(AxisType.Y);
 	    yAxis.setLabel("Quantidade");

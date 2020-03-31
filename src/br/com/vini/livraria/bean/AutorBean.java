@@ -1,21 +1,23 @@
 package br.com.vini.livraria.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import javax.persistence.PersistenceException;
 
 import br.com.vini.livraria.dao.DAO;
 import br.com.vini.livraria.entity.Autor;
 import br.com.vini.livraria.util.RedirectView;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class AutorBean {
-
+public class AutorBean implements Serializable{
+	private static final long serialVersionUID = -1458672100805487164L;
+	
 	private Autor autor = new Autor();
 	
 	private Integer autorId;
@@ -49,7 +51,7 @@ public class AutorBean {
 			e.printStackTrace();
 
 			FacesMessage message = new FacesMessage();
-			message.setSummary("O Autor não deve ter livros cadastrados para remoção.");
+			message.setSummary("O Autor nï¿½o deve ter livros cadastrados para remoï¿½ï¿½o.");
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);
 			
 			FacesContext.getCurrentInstance().addMessage(null, message);
