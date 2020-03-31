@@ -1,22 +1,24 @@
 package br.com.vini.livraria.bean;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 import br.com.vini.livraria.dao.DAO;
 import br.com.vini.livraria.entity.Autor;
 import br.com.vini.livraria.entity.Livro;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class LivroBean {
+public class LivroBean implements Serializable{
+	private static final long serialVersionUID = 3768368818679263137L;
 	
 	private Livro livro = new Livro();
 	private Integer autorId;
@@ -60,7 +62,7 @@ public class LivroBean {
 	public void comecaoComDigitoUm(FacesContext fc, UIComponent component, Object value) throws ValidatorException{
 		String valor = value.toString();
 		if(!valor.startsWith("1")) {
-			throw new ValidatorException(new FacesMessage("ISBN deve começar com 1"));
+			throw new ValidatorException(new FacesMessage("ISBN deve comeï¿½ar com 1"));
 		}
 	}
 	
@@ -78,17 +80,17 @@ public class LivroBean {
 	}
 	
 	public boolean precoEhMenor(Object valorColuna, Object filtroDigitado, Locale locale) { //java.util.Locale
-		 //tirando espaços do filtro
+		 //tirando espaï¿½os do filtro
         String textoDigitado = (filtroDigitado == null) ? null : filtroDigitado.toString().trim();
 
         System.out.println("Filtrando pelo " + textoDigitado + ", Valor do elemento: " + valorColuna);
 
-        // o filtro é nulo ou vazio?
+        // o filtro ï¿½ nulo ou vazio?
         if (textoDigitado == null || textoDigitado.equals("")) {
             return true;
         }
 
-        // elemento da tabela é nulo?
+        // elemento da tabela ï¿½ nulo?
         if (valorColuna == null) {
             return false;
         }
@@ -98,7 +100,7 @@ public class LivroBean {
             Double precoDigitado = Double.valueOf(textoDigitado);
             Double precoColuna = (Double) valorColuna;
 
-            // comparando os valores, compareTo devolve um valor negativo se o value é menor do que o filtro
+            // comparando os valores, compareTo devolve um valor negativo se o value ï¿½ menor do que o filtro
             return precoColuna.compareTo(precoDigitado) < 0;
 
         } catch (NumberFormatException e) {

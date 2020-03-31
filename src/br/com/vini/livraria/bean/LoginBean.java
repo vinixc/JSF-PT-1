@@ -1,18 +1,21 @@
 package br.com.vini.livraria.bean;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 import br.com.vini.livraria.dao.UsuarioDao;
 import br.com.vini.livraria.entity.Usuario;
 import br.com.vini.livraria.util.RedirectView;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class LoginBean {
-
+public class LoginBean implements Serializable{
+	private static final long serialVersionUID = 1981047718464300886L;
+	
 	private Usuario usuario = new Usuario();
 	
 	public String efetuaLogin() {

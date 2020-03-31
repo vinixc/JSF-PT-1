@@ -1,11 +1,12 @@
 package br.com.vini.livraria.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
@@ -16,10 +17,11 @@ import br.com.vini.livraria.dao.DAO;
 import br.com.vini.livraria.entity.Livro;
 import br.com.vini.livraria.entity.Venda;
 
-@ManagedBean
+@Named
 @ViewScoped
-public class VendasBean {
-	
+public class VendasBean implements Serializable{
+	private static final long serialVersionUID = 2358293964529134200L;
+
 	public List<Venda> getVendas(int i){
 		List<Venda> vendas = new ArrayList<Venda>();
 		List<Livro> livros = new DAO<Livro>(Livro.class).listaTodos();

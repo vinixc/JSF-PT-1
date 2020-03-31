@@ -1,11 +1,14 @@
 package br.com.vini.livraria.bean;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import java.io.Serializable;
 
-@ManagedBean
-@SessionScoped
-public class ThemaBean {
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+
+@Named
+@ViewScoped
+public class ThemaBean implements Serializable{
+	private static final long serialVersionUID = 1878051069556341015L;
 	
 	private String tema = "vader";
 
