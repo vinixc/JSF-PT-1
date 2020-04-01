@@ -3,6 +3,8 @@ package br.com.vini.livraria.bean;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -28,6 +30,16 @@ public class AutorBean implements Serializable{
 
 	public Autor getAutor() {
 		return autor;
+	}
+	
+	@PostConstruct
+	public void init() {
+		System.out.println("AutorBean esta nascendo.....");
+	}
+	
+	@PreDestroy
+	public void morte() {
+		System.out.println("AutorBean esta morrendo.....");
 	}
 
 	public RedirectView gravar() {
