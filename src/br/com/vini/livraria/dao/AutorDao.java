@@ -1,5 +1,6 @@
 package br.com.vini.livraria.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -8,8 +9,10 @@ import javax.persistence.EntityManager;
 
 import br.com.vini.livraria.entity.Autor;
 
-public class AutorDao{
-	
+public class AutorDao implements Serializable{
+
+	private static final long serialVersionUID = 291276214021240458L;
+
 	@Inject
 	EntityManager em;
 	

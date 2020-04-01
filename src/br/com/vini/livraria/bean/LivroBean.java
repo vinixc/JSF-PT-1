@@ -9,9 +9,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.vini.livraria.dao.DAO;
+import br.com.vini.livraria.dao.AutorDao;
+import br.com.vini.livraria.dao.LivroDao;
 import br.com.vini.livraria.entity.Autor;
 import br.com.vini.livraria.entity.Livro;
 
@@ -24,6 +26,12 @@ public class LivroBean implements Serializable{
 	private Integer autorId;
 	
 	private List<Livro> livros;
+	
+	@Inject
+	private LivroDao dao;
+	
+	@Inject
+	private AutorDao autorDao;
 
 	public void gravar() {
 		System.out.println("Gravando livro " + this.livro.getTitulo());
@@ -34,12 +42,11 @@ public class LivroBean implements Serializable{
 			return;
 		}
 		
-		DAO<Livro> dao = new DAO<Livro>(Livro.class);
 		if(this.livro.getId() == null) {
 			dao.adiciona(this.livro);
 			this.livros = dao.listaTodos();
 		}else {
-			new DAO<Livro>(Livro.class).atualiza(this.livro);
+			dao.atualiza(this.livro);
 		}
 		
 		
@@ -51,11 +58,11 @@ public class LivroBean implements Serializable{
 	}
 	
 	public void remover(Livro livro) {
-		new DAO<Livro>(Livro.class).remove(livro);
+		dao.remove(livro);
 	}
 	
 	public void gravarAutor() {
-		Autor autor = new DAO<Autor>(Autor.class).buscaPorId(this.autorId);
+		Autor autor = autorDao.buscaPorId(this.autorId);
 		this.livro.adicionaAutor(autor);
 	}
 	
@@ -72,7 +79,6 @@ public class LivroBean implements Serializable{
 	}
 	
 	public List<Livro> getLivros() {
-		  DAO<Livro> dao = new DAO<Livro>(Livro.class);
 		  if(this.livros == null) {
 			  this.livros = dao.listaTodos();
 		  }
@@ -115,7 +121,7 @@ public class LivroBean implements Serializable{
 	}
 	
 	public List<Autor> getAutores(){
-		return new DAO<Autor>(Autor.class).listaTodos();
+		return autorDao.listaTodos();
 	}
 
 	public Livro getLivro() {

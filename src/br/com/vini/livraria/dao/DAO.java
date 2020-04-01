@@ -1,12 +1,15 @@
 package br.com.vini.livraria.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
 
-public class DAO<T> {
+public class DAO<T> implements Serializable{
 
+	private static final long serialVersionUID = -7359516794029039580L;
+	
 	private final Class<T> classe;
 	private EntityManager em;
 
