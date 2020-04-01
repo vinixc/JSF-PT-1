@@ -98,8 +98,7 @@
 				</h:commandLink>
 			</p:column>
 			<p:column headerText="Alterar">
-				<h:commandLink id="cmlAlterarLivro" value="Alterar">
-					<f:setPropertyActionListener value="#{livro}" target="#{livroBean.livro}" />
+				<h:commandLink id="cmlAlterarLivro" value="Alterar" action="#{livroBean.carregarLivro(livro)}">
 					<f:ajax execute="@this" render="@form"></f:ajax>
 				</h:commandLink>
 			</p:column>

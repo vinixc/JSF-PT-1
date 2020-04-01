@@ -122,6 +122,10 @@ public class LivroBean implements Serializable{
         }
 	}
 	
+	public void carregarLivro(Livro livro) {
+		this.livro = this.dao.buscaPorId(livro.getId());
+	}
+	
 	public List<Autor> getAutoresDoLivro(){
 		return this.livro.getAutores();
 	}
