@@ -14,6 +14,7 @@ import javax.persistence.PersistenceException;
 
 import br.com.vini.livraria.dao.AutorDao;
 import br.com.vini.livraria.entity.Autor;
+import br.com.vini.livraria.tx.Transacional;
 import br.com.vini.livraria.util.RedirectView;
 
 @Named
@@ -41,7 +42,8 @@ public class AutorBean implements Serializable{
 	public void morte() {
 		System.out.println("AutorBean esta morrendo.....");
 	}
-
+	
+	@Transacional
 	public RedirectView gravar() {
 		System.out.println("Gravando autor " + this.autor.getNome());
 		
@@ -60,6 +62,7 @@ public class AutorBean implements Serializable{
 		return this.dao.listaTodos();
 	}
 	
+	@Transacional
 	public void removerAutor(Autor autor) {
 		try {
 			this.dao.remove(autor);
@@ -67,7 +70,7 @@ public class AutorBean implements Serializable{
 			e.printStackTrace();
 
 			FacesMessage message = new FacesMessage();
-			message.setSummary("O Autor n�o deve ter livros cadastrados para remo��o.");
+			message.setSummary("O Autor não deve ter livros cadastrados para remoção.");
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);
 			
 			FacesContext.getCurrentInstance().addMessage(null, message);

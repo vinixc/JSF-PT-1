@@ -16,6 +16,7 @@ import br.com.vini.livraria.dao.AutorDao;
 import br.com.vini.livraria.dao.LivroDao;
 import br.com.vini.livraria.entity.Autor;
 import br.com.vini.livraria.entity.Livro;
+import br.com.vini.livraria.tx.Transacional;
 
 @Named
 @ViewScoped
@@ -32,7 +33,8 @@ public class LivroBean implements Serializable{
 	
 	@Inject
 	private AutorDao autorDao;
-
+	
+	@Transacional
 	public void gravar() {
 		System.out.println("Gravando livro " + this.livro.getTitulo());
 
@@ -49,14 +51,15 @@ public class LivroBean implements Serializable{
 			dao.atualiza(this.livro);
 		}
 		
-		
 		this.livro = new Livro();
 	}
+	
 	
 	public void removerAutor(Autor autor) {
 		this.livro.removeAutor(autor);
 	}
 	
+	@Transacional
 	public void remover(Livro livro) {
 		dao.remove(livro);
 	}
