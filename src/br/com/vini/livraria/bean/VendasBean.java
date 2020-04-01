@@ -1,9 +1,7 @@
 package br.com.vini.livraria.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -14,8 +12,7 @@ import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
 
-import br.com.vini.livraria.dao.LivroDao;
-import br.com.vini.livraria.entity.Livro;
+import br.com.vini.livraria.dao.VendaDao;
 import br.com.vini.livraria.entity.Venda;
 
 @Named
@@ -24,19 +21,10 @@ public class VendasBean implements Serializable{
 	private static final long serialVersionUID = 2358293964529134200L;
 	
 	@Inject
-	private LivroDao livroDao;
+	private VendaDao vendaDao;
 
-	public List<Venda> getVendas(int i){
-		List<Venda> vendas = new ArrayList<Venda>();
-		List<Livro> livros = livroDao.listaTodos();
-		
-		Random random = new Random(i);
-		for(Livro livro : livros) {			
-			Integer quantidade = random.nextInt(500);
-			vendas.add(new Venda(livro, quantidade));
-		}
-		
-		return vendas;
+	public List<Venda> getVendas(){
+		return vendaDao.listaTodos();
 	}
 	
 	public BarChartModel getVendasModel() {
@@ -54,23 +42,17 @@ public class VendasBean implements Serializable{
 		ChartSeries vendaSerie = new ChartSeries();
 		vendaSerie.setLabel("Vendas 2020");
 		
-		List<Venda> vendas = getVendas(4321);
+		List<Venda> vendas = getVendas();
 		for(Venda venda : vendas ) {
-			vendaSerie.set(venda.getLivro().getTitulo(), venda.getQuantidade());
-		}
-		
-		
-		ChartSeries vendaSerie19 = new ChartSeries();
-		vendaSerie19.setLabel("Vendas 2019");
-		
-		vendas = getVendas(1234);
-		
-		for(Venda venda : vendas ) {
-			vendaSerie19.set(venda.getLivro().getTitulo(), venda.getQuantidade());
+			if(vendaSerie.getData().containsKey(venda.getLivro().getTitulo())){
+				vendaSerie.getData().put(venda.getLivro().getTitulo(),
+						vendaSerie.getData().get(venda.getLivro().getTitulo()).intValue() + venda.getQuantidade());
+			}else {
+				vendaSerie.set(venda.getLivro().getTitulo(), venda.getQuantidade());
+			}
 		}
 		
 		model.addSeries(vendaSerie);
-		model.addSeries(vendaSerie19);
 		return model;
 	}
 

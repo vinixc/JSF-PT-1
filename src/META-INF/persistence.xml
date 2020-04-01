@@ -11,6 +11,7 @@
 		<class>br.com.vini.livraria.entity.Livro</class>
 		<class>br.com.vini.livraria.entity.Autor</class>
 		<class>br.com.vini.livraria.entity.Usuario</class>
+		<class>br.com.vini.livraria.entity.Venda</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />

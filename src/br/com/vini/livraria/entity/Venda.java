@@ -1,7 +1,19 @@
 package br.com.vini.livraria.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Venda {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@ManyToOne
 	private Livro livro;
 	private Integer quantidade;
 	
@@ -10,6 +22,9 @@ public class Venda {
 		this.quantidade = quantidade;
 	}
 	
+	public Venda() {
+	}
+
 	public Integer getQuantidade() {
 		return quantidade;
 	}
