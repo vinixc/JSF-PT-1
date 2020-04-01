@@ -18,6 +18,9 @@ public class GerenciadorDeTransacao implements Serializable{
 	@Inject
 	private EntityManager manager;
 	
+	@Inject
+	private FacesContext context;
+	
 	@AroundInvoke
 	public Object executaTX(InvocationContext contexto) throws Exception {
 		try {
@@ -35,7 +38,6 @@ public class GerenciadorDeTransacao implements Serializable{
 		}catch(Exception e) {
 			manager.getTransaction().rollback();
 			
-			FacesContext context = FacesContext.getCurrentInstance();
 			FacesMessage message = new FacesMessage();
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);
 			message.setSummary(e.getMessage());

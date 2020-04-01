@@ -28,6 +28,9 @@ public class AutorBean implements Serializable{
 	
 	@Inject
 	private AutorDao dao;
+	
+	@Inject
+	private FacesContext context;
 
 	public Autor getAutor() {
 		return autor;
@@ -73,7 +76,7 @@ public class AutorBean implements Serializable{
 			message.setSummary("O Autor não deve ter livros cadastrados para remoção.");
 			message.setSeverity(FacesMessage.SEVERITY_ERROR);
 			
-			FacesContext.getCurrentInstance().addMessage(null, message);
+			context.addMessage(null, message);
 			return;
 		}
 	}
